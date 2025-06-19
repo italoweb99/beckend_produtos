@@ -12,8 +12,7 @@ const cursos  = ["Node.js"];
 //const Funcionarios = require('./models/Funcionarios')
 const produtosRoutes = require('./routes/produtosRoutes')
 
-const SwaggerUI = require('swagger-ui-express');
-const swaggerDocument = require('./documentacao.json');
+
 
 server.use('/docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument, {
   customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
