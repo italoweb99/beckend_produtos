@@ -1,0 +1,296 @@
+{
+    "openapi": "3.1.0",
+    "info" :{
+        "title":"Api Produtos",
+        "description": "Api criada como segundo trabalho da disciplina de engenharia de software e tem como objetivo ser uma api para retornar produtos de um banco de dados Mongo ",
+        "version" : "1.0.0"
+    },
+    "basePath": "/",
+    "paths":{
+        "/produtos":{
+          "post":{
+            "description": "Postar um produto no banco com os parâmetros informados",
+            "summary": "Postar um produto",
+            "tags": ["Produtos"],
+            "requestBody":{
+                "required": true,
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            
+                            "type": "object",
+                            "$ref":"#/components/schemas/Produto"
+                        },
+                        "examples":{
+                            "produtos":{
+                                "value":{
+                                    "nome": "Samsung Galaxy S23",
+                                    "descricao": "O flagship da empresa sul coreana",
+                                    "cor": "preto",
+                                    "peso": 200,
+                                    "tipo": "Celular",
+                                    "preco":5000
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+          },
+          "get":{
+            "tags":["Produtos"],
+            "summary": "Retorna todos os produtos",
+            "description" : "Retorna todos os produtos existentes no banco",
+            "responses":{
+                "200":{
+                    "description" : "OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type": "array",
+                                "items":{
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                       
+                    }
+                },
+                 "500":{
+                            "description":"Erro ao buscar produtos"
+                        }
+            }
+          }
+        },
+        "/produtos/findByName/{name}": {
+            
+            "get" :{
+                "tags":["Produtos"],
+                "summary": "Retorna um produto",
+                "description" : "Retorna um produto com base no nome",
+                "parameters" :[
+                    {
+                        "name" : "name",
+                        "in" : "path",
+                        "required": true
+                    }
+                ],
+              "responses" :{
+                "200" : {
+                    "description" :"OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type" : "object",
+                                 "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    }
+                },
+                "404":{
+                    "description" : "Produto não encontrado"
+                },
+                "500":{
+                    "description":"Erro ao buscar produto"
+                }
+              }
+            }
+        },
+        "/produtos/findById/{id}": {
+            
+            "get" :{
+                "tags":["Produtos"],
+                "summary":"Retorna um produto",
+                "description":"Retorna um produto com base no ID",
+                "parameters" :[
+                    {
+                        "id" : "id",
+                        "in" : "path",
+                        "required": true
+                    }
+                ],
+              "responses" :{
+                "200" : {
+                    "description" :"OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type" : "array",
+                                "items":{
+                                 "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "404":{
+                    "description" : "Produto não encontrado"
+                },
+                "500":{
+                    "description": "Erro ao buscar produto"
+                }
+              }
+            }
+        },
+        "/produtos/deleteByName/{name}":{
+            "delete":{
+                "summary": "Deleta um produto",
+                "description" : "Deleta um produto com base no nome",
+                "tags": ["Produtos"],
+                "parameters":[
+                    {
+                        "name": "name",
+                        "in" :"path",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description" : " acknowledged: true, deletedCount: 1"
+                    },
+                    "500": {
+                       "description":"erro ao deletar produto"
+                    }
+                }
+            }
+        },
+        "/produto/deleteById/{id}":{
+            "delete":{
+                "description":"Deleta um produto com base no ID",
+                "summary": "Deleta um produto",
+                "tags":["Produtos"],
+                "parameters":[
+                    {
+                    "id" : "id",
+                    "in": "path",
+                    "required" : true
+                    }
+            ],
+            "responses":{
+                "200":{
+                    "description": " acknowledged: true, deletedCount: 1"
+                },
+                "500":{
+                    "description": "erro ao deletar produto"
+                }
+            }
+            }
+        },
+        "/produtos/updateByName/{name}":{
+            "put":{
+            "summary":"Atualiza um produto",
+            "description": "Atualiza um produto com base no nome e nos parametros informados",
+            "tags":["Produtos"],
+            "parameters":[
+                {
+                "name" : "name",
+                "in":"path",
+                "required": true
+                }
+            ],
+            "requestBody":{
+                "required": true,
+                "content":{
+                "application/json":{
+                    "schema":{
+                        "$ref":"#/components/schemas/Produto"
+                    }
+                }
+                }
+            },
+            "responses":{
+                "200" :{
+                    "description" : "OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    }
+                },
+                "404":{
+                    "description": "produto não encontrado"
+                },
+                "500" :{
+                    "description": "Erro ao atualizar"
+                }
+            }
+        }
+        },
+           "/produtos/updateById/{id}":{
+            "put":{
+                 "summary":"Atualiza um produto",
+            "description": "Atualiza um produto com base no ID e nos parametros informados",
+            "tags":["Produtos"],
+            "parameters":[
+                {
+                "id" : "id",
+                "in":"path",
+                "required": true
+                }
+            ],
+            "requestBody":{
+                "required": true,
+                "content":{
+                "application/json":{
+                    "schema":{
+                        "$ref":"#/components/schemas/Produto"
+                    }
+                }
+                }
+            },
+            "responses":{
+                "200" :{
+                    "description" : "OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    }
+                },
+                "404":{
+                    "description": "produto não encontrado"
+                },
+                "500" :{
+                    "description": "Erro ao atualizar"
+                }
+            }
+        }
+        }
+        
+        
+    },
+    
+    "components":{
+        "schemas":{
+            "Produto":{
+                "type": "object",
+                "properties":{
+                "nome":{
+                    "type": "string"
+                },
+                "descricao" : {
+                    "type" : "String"
+                },
+                "cor":{
+                    "type" : "string"
+                },
+                "peso" :{
+                    "type": "number"
+                },
+                "tipo":{
+                    "type" : "string"
+                },
+                "preco" : {
+                    "type" : "number"
+                }
+            }
+            
+            }
+        }
+    }
+}
