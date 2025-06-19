@@ -14,7 +14,7 @@ const produtosRoutes = require('./routes/produtosRoutes')
 
 
 
-server.use('/docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument, {
+server.use('/docs', SwaggerUI.serve, SwaggerUI.setup(SwaggerDoc, {
   customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
   customJs: [
     'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-bundle.min.js',
