@@ -1,9 +1,9 @@
 
-const SweggerUI = require('swagger-ui-express')
 const express = require('express');
+const SweggerUI = require('swagger-ui-express');
 const server = express();
 const mongoose = require('mongoose');
-const SweggerDoc = require('./documentacao.json')
+const SweggerDoc = require('documentacao.json')
 server.use(express.json());
 const cursos  = ["Node.js"];
 
